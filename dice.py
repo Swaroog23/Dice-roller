@@ -12,7 +12,6 @@ def dice_func(die):
     for d in viable_dice:
         if d in die:
             dice = d
-
             break
 
     if len(dice) == 0:
@@ -40,7 +39,9 @@ def amount_func(amount):
 
     if len(amount_of_rolls) == 0:
         amount_of_rolls = 1
+        
     # If user does not input any number before the dice in input, it will assume 1 as the amount of dice to roll
+    
     elif amount_of_rolls == "0":
         amount_of_rolls = 0
 
@@ -68,6 +69,7 @@ def mod_func(roll):
         mod = int(mod)
     except ValueError:
         return "Wrong input!"
+    
     return mod
 
 
@@ -84,7 +86,8 @@ def dice_roller():
     validate = roll.replace("d", "").replace("+", "").replace('-', "")
 
     # "validate" variable is made just for checking if input is correct, by trying to convert itself into a integer.
-    # This allows us to find if there are any unwanted characters, because we got rid of +, - and d which are essential
+    # This allows us to find if there are any unwanted characters, because we got rid of +, - and d which are essential for the roll.
+    # Even if there are multiple of + or - signs, we can catch them either later in function or in other 3 functions.
 
     if not isinstance(roll, str):
         return "Wrong input!"
@@ -95,7 +98,7 @@ def dice_roller():
         return "Wrong input!"
 
     # Checking if the input is correct, so that user can only use xDy+z format
-    # and is informed if the input something wrong
+    # and is informed if they input something wrong.
 
     dice = dice_func(roll)
     amount_of_dice = amount_func(roll)
@@ -110,9 +113,7 @@ def dice_roller():
         result = 0
         for amount in range(amount_of_dice):
             result += randint(1, dice)
-        # The last loop simulates the rolling of the dice, each one individually, just like in an RPG game
+            
+        # The last loop simulates the rolling of the dice, each one individually, just like in an RPG game.
 
     return result + modifier
-
-
-print(dice_roller())
